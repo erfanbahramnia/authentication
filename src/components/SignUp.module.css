@@ -1,0 +1,101 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    box-sizing: border-box;
+    background-color: #fff;
+    height: 590px;
+    width: 350px;
+    padding: 20px 50px;
+    border: 0.5px solid silver;
+    border-radius: 8px;
+}
+
+.form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 360px;
+    color: #3d3d3d;
+}
+
+.header, #confrimPass, #login {
+    color: #1a73e8;;
+}
+
+.data {
+    box-sizing: border-box;
+    height: 150px;
+}
+
+.userInput, .uncomplete {
+    width: 250px;
+    height: 19px;
+    padding: 1px 3px;
+    outline: none;
+    border: 0.7px solid silver;
+    border-radius: 3px;
+    transition: all 0.4s ease-in;
+}
+
+.uncomplete {
+    border-color: red;
+}
+
+.userInput:focus, .uncomplete:focus {
+    border-color: #1a73e8;
+    transition: all 0.4s ease-in;
+}
+
+
+.errors {
+    font-size: 0.7rem;
+    text-align: left;
+    width: fit-content;
+    height:10px;
+    line-height: 10px;
+    padding: 2px 3px;
+    color: red;
+    background-color: rgba(255, 0, 0, 0.175);
+    border-radius: 3px;
+}
+
+.privacy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#login {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 17px;
+    transition: all 0.3s;
+}
+
+#login:active {
+    color: #063571;
+}
+
+#signup {
+    color: #fff;
+    background-color: #1a73e8;
+    cursor: pointer;
+    border: none;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px 9px;
+}
+
+#signup:active {
+    background-color: #063571;
+}
