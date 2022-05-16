@@ -41,7 +41,7 @@ const validation = (data, type) => {
             delete error.confirmPass
         };
 
-        if (data.privacy === false) {
+        if (!data.privacy) {
             error.privacy = "please accept the privacy policy";
         } else {
             delete error.privacy;
