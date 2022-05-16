@@ -80,6 +80,7 @@
     font-weight: 600;
     font-size: 17px;
     transition: all 0.3s;
+    text-decoration: none;
 }
 
 #login:active {
