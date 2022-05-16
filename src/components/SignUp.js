@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // function for vaildate the data
 import validation from "../functions/validation";
@@ -76,7 +77,6 @@ const SignUp = () => {
 
 
         if (Object.keys(error).length) {
-            console.log("error")
             notification("error");
         } else {
             notification("noError");
@@ -155,7 +155,7 @@ const SignUp = () => {
                 </div>
             </form>
             <div className={styles.buttons}>
-                <button id={styles.login}>Login</button>
+                <Link to="/login" id={styles.login}>Login</Link>
                 <button id={styles.signup} onClick={clickHandler}>Sign Up</button>
             </div>
             <ToastContainer />
