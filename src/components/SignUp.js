@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 
 // function for vaildate the data
 import validation from "../functions/validation";
-
 // css style
 import styles from "./SignUp.module.css"
+// toastify
+import notification from "../functions/toast";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
 
@@ -59,6 +62,26 @@ const SignUp = () => {
             [name]: true,
         }));
     };
+
+    // call when click on sign up button 
+    const clickHandler = () => {
+        // set to ture because if user doesn't fill the input show the error
+        setFocus({
+            name: true,
+            email: true,
+            pass: true,
+            confirmPass: true,
+            privacy: true
+        })
+
+
+        if (Object.keys(error).length) {
+            console.log("error")
+            notification("error");
+        } else {
+            notification("noError");
+        }
+    }
     
     return (
         <div className={styles.container}>
@@ -133,8 +156,9 @@ const SignUp = () => {
             </form>
             <div className={styles.buttons}>
                 <button id={styles.login}>Login</button>
-                <button id={styles.signup}>Sign Up</button>
+                <button id={styles.signup} onClick={clickHandler}>Sign Up</button>
             </div>
+            <ToastContainer />
         </div>
     )
 };
