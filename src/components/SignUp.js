@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+// function for vaildate the data
+import validation from "../functions/validation";
 
 // css style
 import styles from "./SignUp.module.css"
@@ -16,7 +19,13 @@ const SignUp = () => {
 
     // for changing the class of inputs when focused on them 
     const [focus, setFocus] = useState({})
+    // for knowing that data is valid or not
+    const [error, setError] = useState({})
 
+    // validation whenever data changed
+    useEffect(() => {
+        setError(validation(data, "signup"));
+    }, [data, focus]);
 
     // this function take data and save them in data state
     const changeHandler = (event) => {
@@ -49,7 +58,7 @@ const SignUp = () => {
             ...prevState,
             [name]: true,
         }));
-    }
+    };
     
     return (
         <div className={styles.container}>
@@ -62,11 +71,11 @@ const SignUp = () => {
                     <br />
                     <input type="text"
                         name="name"  
-                        className={focus.name ? styles.uncomplete : styles.userInput}
+                        className={focus.name && error.name ? styles.uncomplete : styles.userInput}
                         value={data.name} 
                         onChange={changeHandler}
                         onFocus={focusHandler} />
-                    {/* <span className={styles.errors}>error</span> */}
+                    {error.name && focus.name && <span className={styles.errors}>{error.name}</span> }
                 </div>
 
                 {/* taking email */}
@@ -75,11 +84,11 @@ const SignUp = () => {
                     <br />
                     <input type="email" 
                         name="email" 
-                        className={focus.email ? styles.uncomplete : styles.userInput}
+                        className={focus.email && error.email ? styles.uncomplete : styles.userInput}
                         value={data.email}
                         onChange={changeHandler}
                         onFocus={focusHandler} />
-                    {/* <span className={styles.errors}>error</span> */}
+                    {error.email && focus.email && <span className={styles.errors}>{error.email}</span> }
                 </div>
 
                 {/* taking password */}
@@ -88,24 +97,24 @@ const SignUp = () => {
                     <br />
                     <input type="password" 
                         name="pass" 
-                        className={focus.pass ? styles.uncomplete : styles.userInput}
+                        className={focus.pass && error.pass ? styles.uncomplete : styles.userInput}
                         value={data.pass}
                         onChange={changeHandler}
                         onFocus={focusHandler} />
-                    {/* <span className={styles.errors}>error</span> */}
+                    {error.pass && focus.pass && <span className={styles.errors}>{error.pass}</span> }
                 </div>
                 
                 {/* confirming password */}
                 <div className={styles.data}>
-                    <label id={styles.confrimPass}>Confirm password</label>
+                    <label id={styles.confirmPass}>Confirm password</label>
                     <br />
                     <input type="password" 
                         name="confirmPass" 
-                        className={focus.confirmPass ? styles.uncomplete : styles.userInput}
+                        className={focus.confirmPass && error.confirmPass ? styles.uncomplete : styles.userInput}
                         value={data.confirmPass}
                         onChange={changeHandler}
                         onFocus={focusHandler} />
-                    {/* <span className={styles.errors}>error</span> */}
+                    {error.confirmPass && focus.confirmPass && <span className={styles.errors}>{error.confirmPass}</span> }
                 </div>
 
                 {/* taking accept for privacy */}
@@ -119,7 +128,7 @@ const SignUp = () => {
                             onChange={changeHandler}
                             onFocus={focusHandler} />
                     </div>
-                    {/* <span className={styles.errors}>error</span> */}
+                    {error.privacy && focus.privacy && <span className={styles.errors}>{error.privacy}</span> }
                 </div>
             </form>
             <div className={styles.buttons}>
