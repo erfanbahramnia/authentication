@@ -5,6 +5,7 @@ import styles from "./SignUp.module.css"
 
 const SignUp = () => {
 
+    // for saving data
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -13,12 +14,14 @@ const SignUp = () => {
         privacy: "",
     });
 
+    // for changing the class of inputs when focused on them 
+    const [focus, setFocus] = useState({})
+
+
     // this function take data and save them in data state
     const changeHandler = (event) => {
-
         // this is for checkbox
-        if (event.target.name == "privacy") {
-
+        if (event.target.name === "privacy") {
             // value of checkbox saved in value and will use as a value in data state
             const dataValue = event.target.checked;
             // change data state
@@ -27,7 +30,6 @@ const SignUp = () => {
                 privacy: dataValue,
             }));
         } else { // this is for other type of inputs
-
             // the names of inputs taked that used for as a key in data state
             const dataKey = event.target.name;
             // value of input saved in value and will use as a value in data state
@@ -38,9 +40,16 @@ const SignUp = () => {
                 [dataKey]: dataValue,
             }));
         };
-
     };
-
+    
+    // when focused in input the value of focus state will be true
+    const focusHandler = event => {
+        const name = event.target.name;
+        setFocus((prevState) => ({
+            ...prevState,
+            [name]: true,
+        }));
+    }
     
     return (
         <div className={styles.container}>
@@ -53,9 +62,10 @@ const SignUp = () => {
                     <br />
                     <input type="text"
                         name="name"  
-                        className={styles.userInput}
+                        className={focus.name ? styles.uncomplete : styles.userInput}
                         value={data.name} 
-                        onChange={changeHandler} />
+                        onChange={changeHandler}
+                        onFocus={focusHandler} />
                     {/* <span className={styles.errors}>error</span> */}
                 </div>
 
@@ -65,9 +75,10 @@ const SignUp = () => {
                     <br />
                     <input type="email" 
                         name="email" 
-                        className={styles.userInput}
+                        className={focus.email ? styles.uncomplete : styles.userInput}
                         value={data.email}
-                        onChange={changeHandler} />
+                        onChange={changeHandler}
+                        onFocus={focusHandler} />
                     {/* <span className={styles.errors}>error</span> */}
                 </div>
 
@@ -77,9 +88,10 @@ const SignUp = () => {
                     <br />
                     <input type="password" 
                         name="pass" 
-                        className={styles.userInput}
+                        className={focus.pass ? styles.uncomplete : styles.userInput}
                         value={data.pass}
-                        onChange={changeHandler} />
+                        onChange={changeHandler}
+                        onFocus={focusHandler} />
                     {/* <span className={styles.errors}>error</span> */}
                 </div>
                 
@@ -89,9 +101,10 @@ const SignUp = () => {
                     <br />
                     <input type="password" 
                         name="confirmPass" 
-                        className={styles.userInput}
+                        className={focus.confirmPass ? styles.uncomplete : styles.userInput}
                         value={data.confirmPass}
-                        onChange={changeHandler} />
+                        onChange={changeHandler}
+                        onFocus={focusHandler} />
                     {/* <span className={styles.errors}>error</span> */}
                 </div>
 
@@ -103,7 +116,8 @@ const SignUp = () => {
                         <input type="checkbox" 
                             name="privacy"
                             value={data.privacy}
-                            onChange={changeHandler}  />
+                            onChange={changeHandler}
+                            onFocus={focusHandler} />
                     </div>
                     {/* <span className={styles.errors}>error</span> */}
                 </div>
